@@ -1,8 +1,10 @@
 package com.cos.photogramstart.domain.user;
 
 import lombok.*;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -15,6 +17,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String username;
     private String password;
 
@@ -33,6 +36,6 @@ public class User {
 
     @PrePersist
     public void createDate() {
-        this.createDate = createDate;
+        this.createDate = LocalDateTime.now();
     }
 }
