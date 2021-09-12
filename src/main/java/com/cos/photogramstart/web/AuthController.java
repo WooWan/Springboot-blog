@@ -51,12 +51,7 @@ public class AuthController {
             User user = signupDto.toEntity();
             log.info(user.toString());
             authService.join(user);
-            return "auth/signup";
+            return "auth/signin";
         }
-    }
-
-    @GetMapping("/user/{id}/update")
-    public String update(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        return "user/update";
     }
 }
