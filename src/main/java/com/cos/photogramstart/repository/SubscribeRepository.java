@@ -5,21 +5,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-public interface SubscribeRepository extends JpaRepository<Subscribe, Long> {
+public interface SubscribeRepository extends JpaRepository<Subscribe, Integer> {
 
     @Modifying//insert,delete,update를 네이티브 쿼리로 작성하려면 @Modifying 어노테이션 필요
     @Query(value = "INSERT INTO subscribe(fromUserId, toUserId, createDate) VALUES(:fromUserId,:toUserId,now())", nativeQuery = true)
-    void mSubscribe(Long fromUserId, Long toUserId); //(1(변경된 행의 개수가 리턴됨), -1
+    void mSubscribe(int fromUserId, int toUserId); //(1(변경된 행의 개수가 리턴됨), -1
 
     @Modifying
     @Query(value = "DELETE FROM subscribe WHERE fromUserId =:fromUserId AND toUserId =:toUserId", nativeQuery = true)
-    void mUnSubscribe(Long fromUserId, Long toUserId); //1 ,-1
+    void mUnSubscribe(int fromUserId, int toUserId); //1 ,-1
 
     //팔로우 여부
     @Query(value = "SELECT COUNT(*) FROM subscribe WHERE fromUserId =:principalId AND toUserId =:pageUserId", nativeQuery = true)
-    int mSubscribeState(Long principalId, Long pageUserId);
+    int mSubscribeState(int principalId, int pageUserId);
 
     //팔로우 수
     @Query(value = "SELECT COUNT(*) FROM subscribe WHERE fromUserId =:principalId", nativeQuery = true)
-    int mSubscribeCount(Long principalId);
+    int mSubscribeCount(int principalId);
 }

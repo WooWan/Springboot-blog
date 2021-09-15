@@ -20,7 +20,7 @@ public class SubscribeService {
     private final SubscribeRepository subScribeRepository;
     private final EntityManager em;
 
-    public void subscribe(Long fromUserId, Long toUserId) {
+    public void subscribe(int fromUserId, int toUserId) {
         try {
             subScribeRepository.mSubscribe(fromUserId, toUserId);
         } catch (Exception e) {
@@ -28,12 +28,12 @@ public class SubscribeService {
         }
     }
 
-    public void unsubscribe(Long fromUserId, Long toUserId) {
+    public void unsubscribe(int fromUserId, int toUserId) {
         subScribeRepository.mUnSubscribe(fromUserId, toUserId);
     }
 
     @Transactional(readOnly = true)
-    public List<SubscribeDto> subscribeList(Long principalId, Long pageUserId) {
+    public List<SubscribeDto> subscribeList(int principalId, int pageUserId) {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT u.id, u.username, u.profileImageUrl, ");
         sb.append("if ((SELECT 1 FROM subscribe WHERE fromUserId = ? AND toUserId = u.id), 1, 0) subscribeState, ");
