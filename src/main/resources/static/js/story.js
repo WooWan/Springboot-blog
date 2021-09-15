@@ -136,12 +136,13 @@ function toggleLike(imageId) {
 }
 
 // (4) 댓글쓰기
-function addComment() {
+function addComment(imageId) {
 
-	let commentInput = $("#storyCommentInput-1");
-	let commentList = $("#storyCommentList-1");
+	let commentInput = $(`#storyCommentInput-${imageId}`);
+	let commentList = $(`#storyCommentList-${imageId}`);
 
 	let data = {
+		imageId: imageId,
 		content: commentInput.val()
 	}
 
@@ -149,7 +150,17 @@ function addComment() {
 		alert("댓글을 작성해주세요!");
 		return;
 	}
-
+	$.ajax({
+		type : "post",
+		url: "/api/comment",
+		data: JSON.stringify(data),
+		contentType : "application/json; charset=utf-8",
+		dataType: "json"
+	}).done(res =>{
+		console.log(res);
+	}).fail(error =>{
+		console.log(error)
+	})
 	let content = `
 			  <div class="sl__item__contents__comment" id="storyCommentItem-2""> 
 			    <p>

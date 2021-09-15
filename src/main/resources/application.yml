@@ -24,7 +24,8 @@ spring:
       ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
+      show-sql: true
+      format-sql: true
       
   servlet:
     multipart:
