@@ -20,14 +20,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user/{pageUserId}")
-    public String profile(@PathVariable Long pageUserId, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String profile(@PathVariable int pageUserId, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         UserProfileDto dto = userService.userProfile(pageUserId, principalDetails.getUser().getId());
         model.addAttribute("dto", dto);
         return "user/profile";
     }
 
     @GetMapping("/user/{id}/update")
-    public String update(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String update(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         return "user/update";
     }
 }
