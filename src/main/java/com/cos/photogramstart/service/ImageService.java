@@ -8,6 +8,8 @@ import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,17 @@ public class ImageService {
     private final ImageRepository imageRepository;
 
     @Transactional(readOnly = true)
-    public List<Image> imageStory(Long principalId) {
-        List<Image> images = imageRepository.mStory(principalId);
-        log.info("images: {}", images);
+    public Page<Image> imageStory(int principalId, Pageable pageable) {
+        Page<Image> images = imageRepository.mStory(principalId, pageable);
+
+        images.forEach((image) ->{
+            image.setLikeCount(image.getLikes().size());
+            image.getLikes().forEach((like)->{
+                if(like.getUser().getId() == principalId){
+                    image.setLikeState(true);
+                }
+            });
+        });
         return images;
     }
 
@@ -48,7 +58,12 @@ public class ImageService {
         }
 
         Image image = imageUploadDto.toEntity(imageFileName,user);
-        Image imageEntity = imageRepository.save(image);
+        imageRepository.save(image);
+    }
 
+    @Transactional(readOnly = true)
+    public List<Image> popularImage() {
+        List<Image> images = imageRepository.mPopular();
+        return images;
     }
 }
