@@ -24,8 +24,7 @@ spring:
       ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      show-sql: true
-      format-sql: true
+    show-sql: true
       
   servlet:
     multipart:
@@ -35,7 +34,20 @@ spring:
   security:
     user:
       name: test
-      password: 1234   
+      password: 1234
+
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 3010563855882720
+            client-secret: 92c71fb7d95367077435e5cd952f943e
+            scope:
+              - public_profile
+              - email
+
+
+
 
 file:
   path: C:/workspace/springbootwork/upload/

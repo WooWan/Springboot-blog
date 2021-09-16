@@ -1,4 +1,4 @@
-package com.cos.photogramstart.config;
+package com.cos.photogramstart.config.auth;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.repository.UserRepository;
