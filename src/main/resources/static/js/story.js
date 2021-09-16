@@ -59,22 +59,22 @@ function getStoryItem(image) {
 		</div>
 		<div id="storyCommentList-${image.id}">`;
 
-	// image.comments.forEach((comment)=>{
-	// 	item +=`<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
-	// 			<p>
-	// 				<b>${comment.user.username} :</b> ${comment.content}
-	// 			</p>`;
-	//
-	// 	if(principalId == comment.user.id){
-	// 		item += `	<button onclick="deleteComment(${comment.id})">
-	// 									<i class="fas fa-times"></i>
-	// 								</button>`;
-	// 	}
-	//
-	// 	item += `
-	// 		</div>`;
-	//
-	// });
+	image.comments.forEach((comment)=>{
+		item +=`<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
+				<p>
+					<b>${comment.user.username} :</b> ${comment.content}
+				</p>`;
+
+		if(principalId == comment.user.id){
+			item += `	<button onclick="deleteComment(${comment.id})">
+										<i class="fas fa-times"></i>
+									</button>`;
+		}
+
+		item += `
+			</div>`;
+
+	});
 
 
 	item += `
@@ -158,25 +158,37 @@ function addComment(imageId) {
 		dataType: "json"
 	}).done(res =>{
 		console.log(res);
+		let comment = res.data;
+		let content = `
+			  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"> 
+			    <p>
+			      <b>${comment.user.username}</b>
+			      ${comment.content}
+			    </p>
+			    <button onclick="deleteComment(${comment.id})">
+					<i class="fas fa-times"></i>
+				</button>
+			  </div>
+	`;
+		commentList.prepend(content);
+		commentInput.val("");
 	}).fail(error =>{
 		console.log(error)
 	})
-	let content = `
-			  <div class="sl__item__contents__comment" id="storyCommentItem-2""> 
-			    <p>
-			      <b>GilDong :</b>
-			      댓글 샘플입니다.
-			    </p>
-			    <button><i class="fas fa-times"></i></button>
-			  </div>
-	`;
-	commentList.prepend(content);
-	commentInput.val("");
 }
 
 // (5) 댓글 삭제
-function deleteComment() {
-
+function deleteComment(commentId) {
+	console.log("delete")
+	$.ajax({
+		type : "delete",
+		url: `/api/comment/${commentId}`
+	}).done(res =>{
+		console.log(res);
+		$(`#storyCommentItem-${commentId}`).remove()
+	}).fail(error =>{
+		console.log(error);
+	})
 }
 
 

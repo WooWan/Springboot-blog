@@ -1,5 +1,6 @@
 package com.cos.photogramstart.domain.image;
 
+import com.cos.photogramstart.domain.comment.Comment;
 import com.cos.photogramstart.domain.likes.Likes;
 import com.cos.photogramstart.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,6 +29,12 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+
+    @OrderBy("id DESC ")
+    @JsonIgnoreProperties({"image"})
+    @OneToMany(mappedBy = "image")
+    private List<Comment> comments;
+
 
     @JsonIgnoreProperties({"image"})
     @OneToMany(mappedBy = "image")
