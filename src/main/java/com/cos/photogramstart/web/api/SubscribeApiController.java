@@ -1,7 +1,7 @@
 package com.cos.photogramstart.web.api;
 
 
-import com.cos.photogramstart.config.PrincipalDetails;
+import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.service.SubscribeService;
 import com.cos.photogramstart.web.dto.auth.CMRespDto;
 import lombok.RequiredArgsConstructor;
