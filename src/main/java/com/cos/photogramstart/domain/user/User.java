@@ -2,10 +2,7 @@ package com.cos.photogramstart.domain.user;
 
 import com.cos.photogramstart.domain.image.Image;
 import lombok.*;
-import org.apache.tomcat.jni.Local;
-
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(unique = true, length = 20, nullable = false)
+    @Column(unique = true, length = 100, nullable = false)
     private String username;
     @Column(nullable = false)
     private String password;
