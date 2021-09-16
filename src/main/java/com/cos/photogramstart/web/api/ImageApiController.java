@@ -1,6 +1,6 @@
 package com.cos.photogramstart.web.api;
 
-import com.cos.photogramstart.config.PrincipalDetails;
+import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.service.ImageService;
 import com.cos.photogramstart.service.LikesService;
@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

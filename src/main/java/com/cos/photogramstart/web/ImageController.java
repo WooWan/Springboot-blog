@@ -1,6 +1,6 @@
 package com.cos.photogramstart.web;
 
-import com.cos.photogramstart.config.PrincipalDetails;
+import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.service.ImageService;

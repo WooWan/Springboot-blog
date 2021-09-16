@@ -1,6 +1,6 @@
 package com.cos.photogramstart.service;
 
-import com.cos.photogramstart.config.PrincipalDetails;
+import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.repository.ImageRepository;
@@ -63,7 +63,6 @@ public class ImageService {
 
     @Transactional(readOnly = true)
     public List<Image> popularImage() {
-        List<Image> images = imageRepository.mPopular();
-        return images;
+        return imageRepository.mPopular();
     }
 }
